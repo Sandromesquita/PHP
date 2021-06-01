@@ -3,7 +3,7 @@
   	padding: 5px 30px; 	
 }
 
-fieldset
+#campo1
 {
 	background-color: #eeeeee;
 	border: 3px double #333;
@@ -11,6 +11,7 @@ fieldset
   	height:250px;
   	margin: 10px 0 0 0;
 }
+
 
 legend 
 {

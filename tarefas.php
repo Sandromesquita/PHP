@@ -1,50 +1,48 @@
-<?php session_start(); ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Gerenciador de Tarefas</title>
-	<link rel="stylesheet" type="text/css" href="estilo.css">
-</head>
+<?php 
+session_start(); 
 
-<body>
-	
-		<h1>Gerenciador de Tarefas</h1>
-		<div id="area">
-			<form id="formulario">
-				<fieldset><!--O elemento HTML <fieldset> é usado para agrupar elementos, assim como labels (<label>), dentro de um formulário web.-->
-					<legend>Nova Tarefa</legend>
-					<label>
-						Tarefa:
-						<input type="text" name="nome" width="800" />
-					</label>
-					<input type="submit" value="Cadastrar">
-				</fieldset>
-			</form>
-			<?php
-				$lista_tarefas = [];
-				if(array_key_exists(@nome, $_GET)){
-					$_SESSION[@lista_tarefas][] = $_GET[@nome];
-					//$lista_tarefas[] = $_GET[@nome];
-					//echo "Nome informado: ".$_GET[@nome];
-				}
-				$lista_tarefas = [];
-				if (array_key_exists(@lista_tarefas, $_SESSION)) {
-					$lista_tarefas = $_SESSION[@lista_tarefas];
-				}
-			?>
+$lista_tarefas = [];
+	if(array_key_exists(@nome, $_GET) && $_GET[@nome] != ''){
+		$tarefa = [];
 
-			<table>
-				<tr>
-					<th>Tarefas</th>
-				</tr>
-				<?php foreach ($lista_tarefas as $Tarefa): ?>
-					<tr>
-						<td><?php echo "$Tarefa"; ?></td>
-					</tr>
-				<?php endforeach; ?>
-				
-			</table>
-		</div>
+		$tarefa[@nome] = $_GET[@nome];
+
+		if (array_key_exists(@descricao, $_GET)) {
+			$tarefa[@descricao] = $_GET[@descricao];
+		}
+		else{
+			$tarefa[@descricao] = '';
+		}
+
+		if (array_key_exists(@prazo, $_GET)) {
+			$tarefa[@prazo] = $_GET[@prazo];
+		}
+		else{
+			$tarefa[@prazo] = '';
+		}
+
+		$tarefa[@prioridade] = $_GET[@prioridade];
 		
-</body>
-</html>
+
+		if (array_key_exists(@concluida, $_GET)) {
+			$tarefa[@concluida] = $_GET[@concluida];
+		}
+		else{
+			$tarefa[@concluida] = '';
+		}
+
+		$_SESSION[@lista_tarefas][] = $tarefa;
+	}
+
+	
+
+	if (array_key_exists(@lista_tarefas, $_SESSION)) {
+		$lista_tarefas = $_SESSION[@lista_tarefas];
+	}
+	
+include "template.php";
+
+?>
+
+			
+				
